@@ -1,0 +1,108 @@
+{
+  "nodes": [
+    {
+      "index": 0,
+      "name": "app/logic/leaflet_proxy_helpers",
+      "size": 10
+    },
+    {
+      "index": 1,
+      "name": "app/logic/update_map",
+      "size": 50
+    },
+    {
+      "index": 2,
+      "name": "app/logic/utils",
+      "size": 90
+    },
+    {
+      "index": 3,
+      "name": "app/main",
+      "size": 50
+    },
+    {
+      "index": 4,
+      "name": "app/view/dropdowns",
+      "size": 40
+    },
+    {
+      "index": 5,
+      "name": "app/view/info_plot",
+      "size": 50
+    },
+    {
+      "index": 6,
+      "name": "app/view/info_text",
+      "size": 40
+    },
+    {
+      "index": 7,
+      "name": "app/view/map",
+      "size": 80
+    },
+    {
+      "index": 8,
+      "name": "app/view/podium",
+      "size": 50
+    },
+    {
+      "index": 9,
+      "name": "app/view/timeline",
+      "size": 60
+    }
+  ],
+  "links": [
+    {
+      "source": 1,
+      "target": 0
+    },
+    {
+      "source": 3,
+      "target": 4
+    },
+    {
+      "source": 3,
+      "target": 5
+    },
+    {
+      "source": 3,
+      "target": 6
+    },
+    {
+      "source": 3,
+      "target": 7
+    },
+    {
+      "source": 3,
+      "target": 8
+    },
+    {
+      "source": 3,
+      "target": 9
+    },
+    {
+      "source": 3,
+      "target": 2
+    },
+    {
+      "source": 4,
+      "target": 2
+    },
+    {
+      "source": 5,
+      "target": 2
+    },
+    {
+      "source": 7,
+      "target": 1
+    },
+    {
+      "source": 8,
+      "target": 2
+    },
+    {
+      "source": 9,
+      "target": 2
+    }
+  ]
+}
