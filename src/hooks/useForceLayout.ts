@@ -4,7 +4,7 @@ import {
   forceManyBody,
   forceSimulation,
 } from "d3-force";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GraphData } from "../types";
 
 interface useForceLayoutParams {
@@ -22,12 +22,14 @@ const useForceLayout = ({ data, size, ticks = 1e3 }: useForceLayoutParams) => {
     nodes: [],
     links: [],
   });
-  forceSimulation(data.nodes)
-    .force("link", forceLink(data.links))
-    .force("charge", forceManyBody().strength(-1e3))
-    .force("center", forceCenter(width / 2, height / 2))
-    .tick(ticks)
-    .on("end", () => setLayoutData(data));
+  useEffect(() => {
+    forceSimulation(data.nodes)
+      .force("link", forceLink(data.links))
+      .force("charge", forceManyBody().strength(-1500))
+      .force("center", forceCenter(width / 2, height / 2))
+      .tick(ticks)
+      .on("end", () => setLayoutData(data));
+  }, [data]);
   return layoutData;
 };
 

@@ -4,61 +4,98 @@
       "index": 0,
       "name": "leaflet_proxy_helpers",
       "size": 10,
-      "color": "logic"
+      "dependencies": ["leaflet"],
+      "color": "logic",
+      "path": "app/logic/leaflet_proxy_helpers"
     },
     {
       "index": 1,
       "name": "update_map",
       "size": 50,
-      "color": "logic"
+      "dependencies": ["dplyr", "glue", "leaflet", "magrittr", "purrr"],
+      "color": "logic",
+      "path": "app/logic/update_map"
     },
     {
       "index": 2,
       "name": "utils",
       "size": 90,
-      "color": "logic"
+      "dependencies": [
+        "checkmate",
+        "dplyr",
+        "glue",
+        "magrittr",
+        "plotly",
+        "purrr",
+        "shiny",
+        "waiter"
+      ],
+      "color": "logic",
+      "path": "app/logic/utils"
     },
     {
       "index": 3,
       "name": "main",
       "size": 50,
-      "color": "app"
+      "dependencies": ["fst", "sf", "shiny", "waiter"],
+      "color": "app",
+      "path": "app/main"
     },
     {
       "index": 4,
       "name": "dropdowns",
       "size": 40,
-      "color": "view"
+      "dependencies": ["dplyr", "magrittr", "shiny"],
+      "color": "view",
+      "path": "app/view/dropdowns"
     },
     {
       "index": 5,
       "name": "info_plot",
       "size": 50,
-      "color": "view"
+      "dependencies": ["dplyr", "magrittr", "plotly", "shiny"],
+      "color": "view",
+      "path": "app/view/info_plot"
     },
     {
       "index": 6,
       "name": "info_text",
       "size": 40,
-      "color": "view"
+      "dependencies": ["dplyr", "magrittr", "shiny"],
+      "color": "view",
+      "path": "app/view/info_text"
     },
     {
       "index": 7,
       "name": "map",
       "size": 80,
-      "color": "view"
+      "dependencies": [
+        "dplyr",
+        "glue",
+        "htmlwidgets",
+        "leaflet",
+        "magrittr",
+        "purrr",
+        "shiny"
+      ],
+      "color": "view",
+      "path": "app/view/map"
     },
     {
       "index": 8,
       "name": "podium",
       "size": 50,
-      "color": "view"
+      "dependencies": ["dplyr", "magrittr", "plotly", "shiny"],
+      "color": "view",
+      "path": "app/view/podium"
     },
     {
       "index": 9,
       "name": "timeline",
       "size": 60,
-      "color": "view"
+      "dependencies": ["dplyr", "glue", "magrittr", "plotly", "shiny"],
+      "color": "view",
+      "path": "app/view/timeline"
     }
   ],
   "links": [

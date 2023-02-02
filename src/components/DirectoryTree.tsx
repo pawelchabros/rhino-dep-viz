@@ -1,32 +1,32 @@
-import { ScaleOrdinal } from "d3-scale";
-import { DirectoryTreeData } from "../types";
+import { useContext } from "react";
+import PointLabel from "./PointLabel";
+import DataContext from "../store/data-context";
 
 interface DirectoryTreeProps {
-  data: DirectoryTreeData;
-  colorScale: ScaleOrdinal<string, string>;
   lineheight?: number;
   indentation?: number;
 }
 
 const DirectoryTree = ({
-  data,
-  colorScale,
-  lineheight = 40,
-  indentation = 30,
+  lineheight = 35,
+  indentation = 20,
 }: DirectoryTreeProps) => {
+  const { directoryTreeData: data } = useContext(DataContext);
   const height = lineheight * data.length;
-  const labels = data.map(({ name, x, y, color }) => (
-    <g
-      key={name}
-      transform={`translate(${(x + 1) * indentation}, ${
-        (y + 0.5) * lineheight
-      })`}
-    >
-      <circle fill={colorScale(color)} r="5" cx="-15" />
-      <text style={{ dominantBaseline: "central" }}>{name}</text>
-    </g>
-  ));
-  return <svg height={height}>{labels}</svg>;
+  return (
+    <svg height={height}>
+      <g>
+        {data.map((datum) => (
+          <PointLabel
+            key={datum.name}
+            datum={datum}
+            lineheight={lineheight}
+            indentation={indentation}
+          />
+        ))}
+      </g>
+    </svg>
+  );
 };
 
 export default DirectoryTree;

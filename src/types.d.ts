@@ -8,6 +8,8 @@ type Node = {
   name: string;
   size: number;
   color: string;
+  path: string;
+  dependencies: string[];
 } & SimulationNodeDatum;
 
 type LinksData = Link[];
@@ -27,4 +29,10 @@ type DirectoryTreeElement = {
 
 type DirectoryTreeData = DirectoryTreeElement[];
 
-export { DirectoryTreeData, GraphData, LinksData, NodesData };
+export {
+  DirectoryTreeData,
+  DirectoryTreeElement,
+  GraphData,
+  LinksData,
+  NodesData,
+};
