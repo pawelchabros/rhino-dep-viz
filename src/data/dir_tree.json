@@ -1,0 +1,80 @@
+[
+  {
+    "name": "app",
+    "x": 0,
+    "y": 0,
+    "color": "app"
+  },
+  {
+    "name": "main",
+    "x": 1,
+    "y": 1,
+    "color": "app"
+  },
+  {
+    "name": "logic",
+    "x": 1,
+    "y": 2,
+    "color": "logic"
+  },
+  {
+    "name": "leaflet_proxy_helpers",
+    "x": 2,
+    "y": 3,
+    "color": "logic"
+  },
+  {
+    "name": "update_map",
+    "x": 2,
+    "y": 4,
+    "color": "logic"
+  },
+  {
+    "name": "utils",
+    "x": 2,
+    "y": 5,
+    "color": "logic"
+  },
+  {
+    "name": "view",
+    "x": 1,
+    "y": 6,
+    "color": "view"
+  },
+  {
+    "name": "dropdowns",
+    "x": 2,
+    "y": 7,
+    "color": "view"
+  },
+  {
+    "name": "info_plot",
+    "x": 2,
+    "y": 8,
+    "color": "view"
+  },
+  {
+    "name": "info_text",
+    "x": 2,
+    "y": 9,
+    "color": "view"
+  },
+  {
+    "name": "map",
+    "x": 2,
+    "y": 10,
+    "color": "view"
+  },
+  {
+    "name": "podium",
+    "x": 2,
+    "y": 11,
+    "color": "view"
+  },
+  {
+    "name": "timeline",
+    "x": 2,
+    "y": 12,
+    "color": "view"
+  }
+]

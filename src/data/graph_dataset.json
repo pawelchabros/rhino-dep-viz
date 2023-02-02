@@ -2,53 +2,63 @@
   "nodes": [
     {
       "index": 0,
-      "name": "app/logic/leaflet_proxy_helpers",
-      "size": 10
+      "name": "leaflet_proxy_helpers",
+      "size": 10,
+      "color": "logic"
     },
     {
       "index": 1,
-      "name": "app/logic/update_map",
-      "size": 50
+      "name": "update_map",
+      "size": 50,
+      "color": "logic"
     },
     {
       "index": 2,
-      "name": "app/logic/utils",
-      "size": 90
+      "name": "utils",
+      "size": 90,
+      "color": "logic"
     },
     {
       "index": 3,
-      "name": "app/main",
-      "size": 50
+      "name": "main",
+      "size": 50,
+      "color": "app"
     },
     {
       "index": 4,
-      "name": "app/view/dropdowns",
-      "size": 40
+      "name": "dropdowns",
+      "size": 40,
+      "color": "view"
     },
     {
       "index": 5,
-      "name": "app/view/info_plot",
-      "size": 50
+      "name": "info_plot",
+      "size": 50,
+      "color": "view"
     },
     {
       "index": 6,
-      "name": "app/view/info_text",
-      "size": 40
+      "name": "info_text",
+      "size": 40,
+      "color": "view"
     },
     {
       "index": 7,
-      "name": "app/view/map",
-      "size": 80
+      "name": "map",
+      "size": 80,
+      "color": "view"
     },
     {
       "index": 8,
-      "name": "app/view/podium",
-      "size": 50
+      "name": "podium",
+      "size": 50,
+      "color": "view"
     },
     {
       "index": 9,
-      "name": "app/view/timeline",
-      "size": 60
+      "name": "timeline",
+      "size": 60,
+      "color": "view"
     }
   ],
   "links": [

@@ -2,17 +2,29 @@ import { SimulationNodeDatum, SimulationLinkDatum } from "d3-force";
 
 type Id = number;
 
-type Node = {
-  id: Id;
-  name: string;
-  size: number;
-} & SimulationNodeDatum;
-
 type Link = SimulationLinkDatum;
 
-type Data = {
+type Node = {
+  name: string;
+  size: number;
+  color: string;
+} & SimulationNodeDatum;
+
+type LinksData = Link[];
+type NodesData = Node[];
+
+type GraphData = {
   nodes: Node[];
   links: Link[];
 };
 
-export { Data };
+type DirectoryTreeElement = {
+  name: string;
+  x: number;
+  y: number;
+  color: string;
+};
+
+type DirectoryTreeData = DirectoryTreeElement[];
+
+export { DirectoryTreeData, GraphData, LinksData, NodesData };
