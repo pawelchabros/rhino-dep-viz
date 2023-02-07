@@ -5,8 +5,8 @@ import styles from "./NodeLabel.module.css";
 
 interface NodeLabelProps {
   text: string;
-  dependencies: string[];
   y: number;
+  dependencies: string[];
 }
 
 const NodeLabel = ({ text, y, dependencies }: NodeLabelProps) => {

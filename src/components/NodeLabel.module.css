@@ -12,10 +12,12 @@
 
 .header {
   display: flex;
+  align-items: center;
 }
 
 .label {
   font-size: 11px;
+  cursor: move;
 }
 
 .button {
@@ -27,4 +29,5 @@
   font-weight: 700;
   background-color: white;
   box-shadow: 2px 2px 5px #ccc;
+  cursor: pointer;
 }

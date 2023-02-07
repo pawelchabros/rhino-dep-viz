@@ -60,7 +60,7 @@ const Node = ({
         opacity={opacity}
         r={r}
       />
-      <NodeLabel text={path} y={-r} dependencies={dependencies} />
+      <NodeLabel text={path} y={r * 0.8} dependencies={dependencies} />
     </g>
   );
 };
