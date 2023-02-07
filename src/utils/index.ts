@@ -1,1 +1,2 @@
-export { default as setupForceSimulation } from "./setupForceSimulation";
+export { default as connectedWith } from "./connectedWith";
+export { default as scaleColor } from "./scaleColor";

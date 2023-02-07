@@ -1,14 +1,26 @@
+import { Dispatch, SetStateAction } from "react";
 import Links from "./Links";
 import Nodes from "./Nodes";
-import { useContext } from "react";
-import DataContext from "../store/data-context";
+import { GraphData } from "../types";
 
-const NetworkGraph = () => {
-  const { layoutData, size } = useContext(DataContext);
+interface NetworkGraphProps {
+  layoutData: GraphData;
+  setLayoutData: Dispatch<SetStateAction<GraphData>>;
+  size: {
+    width: number;
+    height: number;
+  };
+}
+
+const NetworkGraph = ({
+  layoutData,
+  setLayoutData,
+  size,
+}: NetworkGraphProps) => {
   return (
-    <svg {...size}>
+    <svg {...size} style={{ position: "relative" }}>
       <Links linksData={layoutData.links} />
-      <Nodes layoutData={layoutData} />
+      <Nodes layoutData={layoutData} setLayoutData={setLayoutData} />
     </svg>
   );
 };

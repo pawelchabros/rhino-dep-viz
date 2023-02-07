@@ -1,87 +1,52 @@
-import { useContext } from "react";
-import DataContext from "../store/data-context";
+import { Dispatch, SetStateAction } from "react";
+import Node from "./Node";
+import { connectedWith, scaleColor } from "../utils";
 import { GraphData } from "../types";
+import { useState } from "react";
+import nodeStyle from "../utils/nodeStyle";
 
 interface NodesProps {
   layoutData: GraphData;
+  setLayoutData: Dispatch<SetStateAction<GraphData>>;
   opacity?: number;
 }
 
-const Nodes = ({ layoutData, opacity = 0.7 }: NodesProps) => {
-  const { colorScale, hoveredName, setHoveredName } = useContext(DataContext);
+const Nodes = ({ layoutData, setLayoutData }: NodesProps) => {
+  const colorScale = scaleColor({ data: layoutData.nodes });
+  const [hoveredName, setHoveredName] = useState<string | undefined>();
   const { nodes: nodesData, links: linksData } = layoutData;
-  return (
-    <g>
-      {nodesData.map(
-        ({ index, x, y, size, color, name, path, dependencies }) => {
-          const r = size / 2;
-          const isHovered = name === hoveredName;
-          const isConnected = linksData
-            .filter(
-              ({ source, target }) =>
-                hoveredName === source.name || hoveredName === target.name
-            )
-            .flatMap(({ source, target }) => [source.name, target.name])
-            .includes(name);
-          let style = { opacity, r };
-          if (hoveredName) {
-            if (isHovered) {
-              style = { opacity: 1, r: r * 1.2 };
-            } else if (isConnected) {
-              style = { opacity: 0.7, r: r * 1.1 };
-            } else {
-              style = { opacity: 0.1, r };
-            }
-          }
-          return (
-            <g
-              key={index}
-              transform={`translate(${x}, ${y})`}
-              onMouseEnter={() => {
-                console.log(dependencies);
-                setHoveredName(name);
-              }}
-              onMouseLeave={() => setHoveredName(undefined)}
-            >
-              <circle
-                className="node"
-                fill={colorScale(color)}
-                {...style}
-                cursor="pointer"
-              />
-              <text y={-r} fontSize={12} cursor="pointer" textAnchor="middle">
-                {path}
-              </text>
-              <foreignObject width={300} height={300}>
-                <div
-                  style={{
-                    fontSize: 11,
-                    lineHeight: 1.4,
-                    backgroundColor: "white",
-                    border: "1px solid #eee",
-                    borderRadius: "0 5px 5px 5px",
-                    boxShadow: "2px 2px 5px #ddd",
-                    width: "fit-content",
-                    padding: "0 15px",
-                    zIndex: 9,
-                    display: isHovered ? "block" : "none",
-                  }}
-                >
-                  <ul style={{ padding: 0 }}>
-                    {dependencies.map((dependency, i) => (
-                      <li style={{ listStyle: "none" }} key={i}>
-                        {dependency}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </foreignObject>
-            </g>
-          );
-        }
-      )}
-    </g>
+  const nodeElements = nodesData.map(
+    ({ index, x, y, size, color, name, path, dependencies }) => {
+      const isHovered = name === hoveredName;
+      const isConnected = connectedWith({
+        linksData,
+        node: name,
+        withNode: hoveredName,
+      });
+      const style = nodeStyle({
+        hoveredName,
+        isHovered,
+        isConnected,
+        size,
+      });
+      return (
+        <Node
+          key={index}
+          setLayoutData={setLayoutData}
+          setHoveredName={setHoveredName}
+          index={index || 0}
+          x={x || 0}
+          y={y || 0}
+          name={name}
+          path={path}
+          dependencies={dependencies}
+          color={colorScale(color)}
+          {...style}
+        />
+      );
+    }
   );
+  return <g>{nodeElements}</g>;
 };
 
 export default Nodes;

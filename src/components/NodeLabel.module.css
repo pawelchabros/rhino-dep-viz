@@ -1,0 +1,30 @@
+.object {
+  transition: y 0.3s;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  align-items: end;
+  user-select: none;
+}
+
+.header {
+  display: flex;
+}
+
+.label {
+  font-size: 11px;
+}
+
+.button {
+  margin: 0 5px;
+  border-radius: 50%;
+  border: none;
+  width: 18px;
+  height: 18px;
+  font-weight: 700;
+  background-color: white;
+  box-shadow: 2px 2px 5px #ccc;
+}

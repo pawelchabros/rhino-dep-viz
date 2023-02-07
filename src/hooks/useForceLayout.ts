@@ -4,10 +4,10 @@ import {
   forceManyBody,
   forceSimulation,
 } from "d3-force";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { GraphData } from "../types";
 
-interface useForceLayoutParams {
+interface UseForceLayoutParams {
   data: GraphData;
   size: {
     width: number;
@@ -16,7 +16,12 @@ interface useForceLayoutParams {
   ticks?: number;
 }
 
-const useForceLayout = ({ data, size, ticks = 1e3 }: useForceLayoutParams) => {
+type UseForceLayoutReturn = [
+  GraphData,
+  Dispatch<SetStateAction<GraphData>>
+]
+
+const useForceLayout = ({ data, size, ticks = 1e3 }: UseForceLayoutParams): UseForceLayoutReturn => {
   const { width, height } = size;
   const [layoutData, setLayoutData] = useState<GraphData>({
     nodes: [],
@@ -30,7 +35,7 @@ const useForceLayout = ({ data, size, ticks = 1e3 }: useForceLayoutParams) => {
       .tick(ticks)
       .on("end", () => setLayoutData(data));
   }, [data]);
-  return layoutData;
+  return [layoutData, setLayoutData];
 };
 
 export default useForceLayout;

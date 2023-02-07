@@ -1,0 +1,19 @@
+.menu {
+  font-size: 11px;
+  line-height: 1.4;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #ddd;
+  width: fit-content;
+  padding: 0 15px;
+  z-index: 9;
+}
+
+.list {
+  padding: 0;
+}
+
+.listElement {
+  list-style: none;
+}

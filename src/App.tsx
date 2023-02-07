@@ -1,17 +1,19 @@
-import { DataContextProvider } from "./store/data-context";
 import NetworkGraph from "./components/NetworkGraph";
-
 import graphData from "./data/graph_dataset.json";
-import directoryTreeData from "./data/dir_tree.json";
+import useForceLayout from "./hooks/useForceLayout";
 
 function App() {
+  const size = { width: 800, height: 800 };
+  const [layoutData, setLayoutData] = useForceLayout({ data: graphData, size });
   return (
     <div>
       <h1>Rhino App Dependency Visualisation</h1>
       <div style={{ display: "flex", alignItems: "center", marginLeft: 90 }}>
-        <DataContextProvider {...{ graphData, directoryTreeData }}>
-          <NetworkGraph />
-        </DataContextProvider>
+        <NetworkGraph
+          layoutData={layoutData}
+          setLayoutData={setLayoutData}
+          size={size}
+        />
       </div>
     </div>
   );

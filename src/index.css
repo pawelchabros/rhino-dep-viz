@@ -18,7 +18,3 @@ body {
 div:has(> svg) {
   border: 1px solid lightgrey;
 }
-
-svg * {
-  transition: all 0.3s;
-}

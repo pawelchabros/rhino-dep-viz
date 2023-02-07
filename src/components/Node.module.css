@@ -1,0 +1,5 @@
+.node {
+  cursor: move;
+  transition-property: opacity r;
+  transition-duration: 0.3s;
+}
