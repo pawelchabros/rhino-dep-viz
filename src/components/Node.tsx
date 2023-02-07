@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useDrag from "../hooks/useDrag";
-import { GraphData } from "../types";
+import { GraphData, NetworkSimulation } from "../types";
 import NodeLabel from "./NodeLabel";
 import styles from "./Node.module.css"
 
@@ -9,6 +9,7 @@ interface NodeProps {
   y: number;
   setLayoutData: Dispatch<SetStateAction<GraphData>>;
   setHoveredName: Dispatch<SetStateAction<string | undefined>>;
+  simulation: NetworkSimulation;
   index: number;
   name: string;
   path: string;
@@ -24,6 +25,7 @@ const Node = ({
   index,
   setLayoutData,
   setHoveredName,
+  simulation,
   name,
   path,
   dependencies,
@@ -46,19 +48,20 @@ const Node = ({
         nodes
       }
     })
+    simulation.tick()
   }, [draggedNode])
   return (
     <g
       transform={`translate(${x}, ${y})`}
       onMouseEnter={() => setHoveredName(name)}
       onMouseLeave={() => setHoveredName(undefined)}
-      {...dragHandlers}
     >
       <circle
         className={styles.node}
         fill={color}
         opacity={opacity}
         r={r}
+        {...dragHandlers}
       />
       <NodeLabel text={path} y={r * 0.8} dependencies={dependencies} />
     </g>

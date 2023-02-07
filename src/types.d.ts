@@ -1,4 +1,4 @@
-import { SimulationNodeDatum, SimulationLinkDatum } from "d3-force";
+import { SimulationNodeDatum, SimulationLinkDatum, Simulation } from "d3-force";
 
 type Id = number;
 
@@ -28,11 +28,14 @@ type DirectoryTreeElement = {
 };
 
 type DirectoryTreeData = DirectoryTreeElement[];
+type NetworkSimulation = Simulation<NodeData, LinkData>;
 
 export {
   DirectoryTreeData,
   DirectoryTreeElement,
   GraphData,
   LinksData,
+  NodeData,
   NodesData,
+  NetworkSimulation,
 };

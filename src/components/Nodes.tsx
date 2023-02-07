@@ -1,17 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
 import Node from "./Node";
 import { connectedWith, scaleColor } from "../utils";
-import { GraphData } from "../types";
+import { GraphData, NetworkSimulation } from "../types";
 import { useState } from "react";
 import nodeStyle from "../utils/nodeStyle";
 
 interface NodesProps {
   layoutData: GraphData;
   setLayoutData: Dispatch<SetStateAction<GraphData>>;
+  simulation: NetworkSimulation;
   opacity?: number;
 }
 
-const Nodes = ({ layoutData, setLayoutData }: NodesProps) => {
+const Nodes = ({ layoutData, setLayoutData, simulation }: NodesProps) => {
   const colorScale = scaleColor({ data: layoutData.nodes });
   const [hoveredName, setHoveredName] = useState<string | undefined>();
   const { nodes: nodesData, links: linksData } = layoutData;
@@ -34,6 +35,7 @@ const Nodes = ({ layoutData, setLayoutData }: NodesProps) => {
           key={index}
           setLayoutData={setLayoutData}
           setHoveredName={setHoveredName}
+          simulation={simulation}
           index={index || 0}
           x={x || 0}
           y={y || 0}
