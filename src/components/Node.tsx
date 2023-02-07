@@ -33,14 +33,14 @@ const Node = ({
   opacity,
   r,
 }: NodeProps) => {
-  const [draggedNode, dragHandlers] = useDrag({ x, y });
+  const [draggedPosition, isDragged, dragHandlers] = useDrag({ x, y });
   useEffect(() => {
     setLayoutData((prevLayoutData) => {
       const { nodes, links } = prevLayoutData;
       nodes.forEach((node) => {
-        if (draggedNode.isDragged && node.index === index) {
-          node.x = draggedNode.position.x
-          node.y = draggedNode.position.y
+        if (isDragged && node.index === index) {
+          node.x = draggedPosition.x
+          node.y = draggedPosition.y
         }
       })
       return {
@@ -49,7 +49,7 @@ const Node = ({
       }
     })
     simulation.tick()
-  }, [draggedNode])
+  }, [draggedPosition])
   return (
     <g
       transform={`translate(${x}, ${y})`}
