@@ -11,10 +11,9 @@ interface NodesProps {
   setLayoutData: Dispatch<SetStateAction<GraphData>>;
   simulation: NetworkSimulation;
   colorScale: ScaleOrdinal<string, string>;
-  sizeScale?: number;
 }
 
-const Nodes = ({ layoutData, setLayoutData, simulation, colorScale, sizeScale = 20 }: NodesProps) => {
+const Nodes = ({ layoutData, setLayoutData, simulation, colorScale, }: NodesProps) => {
   const [hoveredName, setHoveredName] = useState<string | undefined>();
   const { nodes: nodesData, links: linksData } = layoutData;
   const connectedWithHovered = connectedWith({ node: hoveredName, linksData })
@@ -26,7 +25,7 @@ const Nodes = ({ layoutData, setLayoutData, simulation, colorScale, sizeScale = 
         hoveredName,
         isHovered,
         isConnected,
-        size: (size + 1) * sizeScale,
+        size,
       });
       return (
         <Node
