@@ -1,19 +1,32 @@
 import { LinksData } from "../types";
 
-interface connectedWithParams {
+interface ConnectedWithParams {
+  node: string | undefined;
   linksData: LinksData;
-  node: string;
-  withNode: string | undefined;
 }
 
-const connectedWith = ({ linksData, node, withNode }: connectedWithParams) => {
-  return linksData
-    .filter(
-      ({ source, target }) =>
-        withNode === source.name || withNode === target.name
-    )
-    .flatMap(({ source, target }) => [source.name, target.name])
-    .includes(node);
+type SourceType = "in" | "by";
+
+interface SourcedParams extends ConnectedWithParams {
+  type: SourceType;
+}
+
+const sourced = ({ node, linksData, type }: SourcedParams): string[] => {
+  const filterOn = type === "in" ? "target" : "source";
+  const searchFor = type === "in" ? "source" : "target";
+  const sourcedByNodes = linksData
+    .filter(({ [filterOn]: { name } }) => name === node)
+    .map(({ [searchFor]: { name } }) => name)
+  if (sourcedByNodes.length === 0) return sourcedByNodes;
+  else return [
+    ...sourcedByNodes,
+    ...sourcedByNodes.flatMap((node) => sourced({ node, linksData, type }))
+  ]
+}
+
+const connectedWith = ({ node, linksData }: ConnectedWithParams) => {
+  const sourceTypes: SourceType[] = ["in", "by"]
+  return sourceTypes.flatMap((type) => sourced({ node, linksData, type }))
 };
 
 export default connectedWith;

@@ -16,14 +16,11 @@ const Nodes = ({ layoutData, setLayoutData, simulation }: NodesProps) => {
   const colorScale = scaleColor({ data: layoutData.nodes });
   const [hoveredName, setHoveredName] = useState<string | undefined>();
   const { nodes: nodesData, links: linksData } = layoutData;
+  const connectedWithHovered = connectedWith({ node: hoveredName, linksData })
   const nodeElements = nodesData.map(
     ({ index, x, y, size, color, name, path, dependencies }) => {
       const isHovered = name === hoveredName;
-      const isConnected = connectedWith({
-        linksData,
-        node: name,
-        withNode: hoveredName,
-      });
+      const isConnected = connectedWithHovered.includes(name);
       const style = nodeStyle({
         hoveredName,
         isHovered,

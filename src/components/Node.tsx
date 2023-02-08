@@ -55,11 +55,11 @@ const Node = ({
       transform={`translate(${x}, ${y})`}
       onMouseEnter={() => setHoveredName(name)}
       onMouseLeave={() => setHoveredName(undefined)}
+      opacity={opacity}
     >
       <circle
         className={styles.node}
         fill={color}
-        opacity={opacity}
         r={r}
         {...dragHandlers}
       />

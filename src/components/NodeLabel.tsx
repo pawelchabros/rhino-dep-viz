@@ -18,7 +18,7 @@ const NodeLabel = ({ text, y, dependencies }: NodeLabelProps) => {
         <div className={styles.header}>
           <span className={styles.label}>{text}</span>
           <button onClick={toggleIsOpen} className={styles.button}>
-            +
+            {isOpen ? "-" : "+"}
           </button>
         </div>
         <Menu dependencies={dependencies} isOpen={isOpen} />
