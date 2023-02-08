@@ -1,19 +1,20 @@
 import { Dispatch, SetStateAction } from "react";
 import Node from "./Node";
-import { connectedWith, scaleColor } from "../utils";
+import { connectedWith } from "../utils";
 import { GraphData, NetworkSimulation } from "../types";
 import { useState } from "react";
+import { ScaleOrdinal } from "d3-scale";
 import nodeStyle from "../utils/nodeStyle";
 
 interface NodesProps {
   layoutData: GraphData;
   setLayoutData: Dispatch<SetStateAction<GraphData>>;
   simulation: NetworkSimulation;
-  opacity?: number;
+  colorScale: ScaleOrdinal<string, string>;
+  sizeScale?: number;
 }
 
-const Nodes = ({ layoutData, setLayoutData, simulation }: NodesProps) => {
-  const colorScale = scaleColor({ data: layoutData.nodes });
+const Nodes = ({ layoutData, setLayoutData, simulation, colorScale, sizeScale = 20 }: NodesProps) => {
   const [hoveredName, setHoveredName] = useState<string | undefined>();
   const { nodes: nodesData, links: linksData } = layoutData;
   const connectedWithHovered = connectedWith({ node: hoveredName, linksData })
@@ -25,7 +26,7 @@ const Nodes = ({ layoutData, setLayoutData, simulation }: NodesProps) => {
         hoveredName,
         isHovered,
         isConnected,
-        size,
+        size: (size + 1) * sizeScale,
       });
       return (
         <Node
@@ -44,7 +45,7 @@ const Nodes = ({ layoutData, setLayoutData, simulation }: NodesProps) => {
         />
       );
     }
-  );
+  ).sort(({ props: { name } }) => +(name === hoveredName));
   return <g>{nodeElements}</g>;
 };
 

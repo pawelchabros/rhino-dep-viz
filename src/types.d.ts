@@ -20,19 +20,10 @@ type GraphData = {
   links: Link[];
 };
 
-type DirectoryTreeElement = {
-  name: string;
-  x: number;
-  y: number;
-  color: string;
-};
-
-type DirectoryTreeData = DirectoryTreeElement[];
 type NetworkSimulation = Simulation<NodeData, LinkData>;
 
 export {
-  DirectoryTreeData,
-  DirectoryTreeElement,
+  Node,
   GraphData,
   LinksData,
   NodeData,

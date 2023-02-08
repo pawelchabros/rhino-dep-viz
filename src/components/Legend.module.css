@@ -1,0 +1,17 @@
+.legend {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.legendMark {
+  border-radius: 50%;
+  margin: 10px;
+}

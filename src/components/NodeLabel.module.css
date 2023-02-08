@@ -18,6 +18,7 @@
 .label {
   font-size: 11px;
   cursor: move;
+  white-space: nowrap;
 }
 
 .button {

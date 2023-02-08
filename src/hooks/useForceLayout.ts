@@ -6,6 +6,7 @@ import {
   forceSimulation,
 } from "d3-force";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { forceBoundries } from "../utils"
 import { GraphData, NetworkSimulation, NodeData } from "../types";
 
 interface UseForceLayoutParams {
@@ -33,9 +34,10 @@ const useForceLayout = ({ data, size, ticks = 1e3 }: UseForceLayoutParams): UseF
   useEffect(() => {
     const simulation = forceSimulation(data.nodes)
       .force("link", forceLink(data.links))
-      .force("collide", forceCollide().radius(({ size }: NodeData) => size / 2))
-      .force("charge", forceManyBody().strength(-2e3))
+      .force("collide", forceCollide().radius(({ size }: NodeData) => (size / 2) * 1.2))
+      .force("charge", forceManyBody().strength(-28e2))
       .force("center", forceCenter(width * 0.55, height * 0.4))
+      .force("boundries", forceBoundries(width, height, 0.14))
       .tick(ticks)
       .on("end", () => setLayoutData(data));
     setSimulation(simulation);
