@@ -9,6 +9,7 @@ import nodeStyle from "../utils/nodeStyle";
 interface NodesProps {
   layoutData: GraphData;
   setLayoutData: Dispatch<SetStateAction<GraphData>>;
+  legendItemHovered: string | undefined;
   simulation: NetworkSimulation;
   colorScale: ScaleOrdinal<string, string>;
 }
@@ -22,7 +23,13 @@ interface NodeElementsData {
   }
 }
 
-const Nodes = ({ layoutData, setLayoutData, simulation, colorScale, }: NodesProps) => {
+const Nodes = ({
+  layoutData,
+  setLayoutData,
+  legendItemHovered,
+  simulation,
+  colorScale,
+}: NodesProps) => {
   const { nodes: nodesData, links: linksData } = layoutData;
   const [hoveredName, setHoveredName] = useState<string | undefined>();
   const [nodeElementsData, setNodeElementsData] = useState<NodeElementsData[]>();
@@ -30,12 +37,13 @@ const Nodes = ({ layoutData, setLayoutData, simulation, colorScale, }: NodesProp
   useEffect(() => {
     const nodeElementsData = nodesData.map(
       (node) => {
-        const { size, name } = node;
+        const { size, name, color } = node;
         const isHovered = name === hoveredName;
         const isConnected = connectedWithHovered.includes(name);
+        const legendHovered = legendItemHovered === color;
         const style = nodeStyle({
-          hoveredName,
-          isHovered,
+          hoveredName: hoveredName || legendItemHovered,
+          isHovered: isHovered || legendHovered,
           isConnected,
           size,
         });
@@ -44,7 +52,7 @@ const Nodes = ({ layoutData, setLayoutData, simulation, colorScale, }: NodesProp
       }
     );
     setNodeElementsData(nodeElementsData)
-  }, [layoutData.nodes, hoveredName])
+  }, [layoutData.nodes, hoveredName, legendItemHovered])
   return (
     <TransitionGroup component="g">{
       nodeElementsData && nodeElementsData

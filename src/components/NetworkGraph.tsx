@@ -4,6 +4,7 @@ import Legend from "./Legend"
 import { GraphData } from "../types";
 import useForceLayout from "../hooks/useForceLayout";
 import { scaleColor } from "../utils";
+import { useState } from "react";
 
 interface NetworkGraphProps {
   data: GraphData;
@@ -18,15 +19,17 @@ const NetworkGraph = ({
   size = { width: 800, height: 850 },
 }: NetworkGraphProps) => {
   const [layoutData, setLayoutData, simulation] = useForceLayout({ data, size });
+  const [legendItemHovered, setLegendItemHovered] = useState<string | undefined>();
   const colorScale = scaleColor({ data: layoutData.nodes });
   return (
     <div style={{ border: "1px solid lightgrey" }}>
-      <Legend scale={colorScale} />
+      <Legend scale={colorScale} setLegendItemHovered={setLegendItemHovered} />
       <svg {...size} >
         <Links linksData={layoutData.links} />
         <Nodes
           layoutData={layoutData}
           setLayoutData={setLayoutData}
+          legendItemHovered={legendItemHovered}
           simulation={simulation}
           colorScale={colorScale}
         />

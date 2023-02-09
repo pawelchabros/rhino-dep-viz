@@ -4,7 +4,7 @@
       "index": 0,
       "name": "leaflet_proxy_helpers",
       "dependencies": ["leaflet"],
-      "size": 40,
+      "size": 20,
       "color": "app/logic/",
       "path": "app/logic/leaflet_proxy_helpers"
     },
@@ -20,7 +20,7 @@
       "index": 2,
       "name": "utils",
       "dependencies": ["checkmate", "dplyr", "glue", "magrittr", "plotly", "purrr", "shiny", "waiter"],
-      "size": 120,
+      "size": 20,
       "color": "app/logic/",
       "path": "app/logic/utils"
     },
@@ -28,7 +28,7 @@
       "index": 3,
       "name": "main",
       "dependencies": ["fst", "sf", "shiny", "waiter"],
-      "size": 20,
+      "size": 160,
       "color": "app/",
       "path": "app/main"
     },
@@ -52,7 +52,7 @@
       "index": 6,
       "name": "info_text",
       "dependencies": ["dplyr", "magrittr", "shiny"],
-      "size": 40,
+      "size": 20,
       "color": "app/view/",
       "path": "app/view/info_text"
     },

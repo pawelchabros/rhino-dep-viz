@@ -15,4 +15,10 @@
 .legendMark {
   border-radius: 50%;
   margin: 0 10px 0 20px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.legendMark:hover {
+  transform: scale(1.2);
 }
