@@ -3,7 +3,7 @@ import Nodes from "./Nodes";
 import Legend from "./Legend"
 import { GraphData } from "../types";
 import useForceLayout from "../hooks/useForceLayout";
-import { scaleColor } from "../utils";
+import { connectedWith, scaleColor } from "../utils";
 import { useState } from "react";
 
 interface NetworkGraphProps {
@@ -20,16 +20,27 @@ const NetworkGraph = ({
 }: NetworkGraphProps) => {
   const [layoutData, setLayoutData, simulation] = useForceLayout({ data, size });
   const [legendItemHovered, setLegendItemHovered] = useState<string | undefined>();
+  const [hoveredNodeName, setHoveredNodeName] = useState<string | undefined>();
   const colorScale = scaleColor({ data: layoutData.nodes });
+  const connectedWithHovered = connectedWith({ node: hoveredNodeName, linksData: layoutData.links })
+  const highlighted = hoveredNodeName
+    ? [hoveredNodeName, ...connectedWithHovered]
+    : connectedWithHovered;
   return (
     <div style={{ border: "1px solid lightgrey" }}>
       <Legend scale={colorScale} setLegendItemHovered={setLegendItemHovered} />
       <svg {...size} >
-        <Links linksData={layoutData.links} />
+        <Links
+          linksData={layoutData.links}
+          highlighted={highlighted}
+        />
         <Nodes
           layoutData={layoutData}
           setLayoutData={setLayoutData}
           legendItemHovered={legendItemHovered}
+          hoveredNodeName={hoveredNodeName}
+          setHoveredNodeName={setHoveredNodeName}
+          connectedWithHovered={connectedWithHovered}
           simulation={simulation}
           colorScale={colorScale}
         />

@@ -1,7 +1,6 @@
 import { Dispatch, RefObject, SetStateAction, useEffect, useState, createRef } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import Node from "./Node";
-import { connectedWith } from "../utils";
 import { GraphData, NetworkSimulation, NodeData } from "../types";
 import { ScaleOrdinal } from "d3-scale";
 import nodeStyle from "../utils/nodeStyle";
@@ -10,6 +9,9 @@ interface NodesProps {
   layoutData: GraphData;
   setLayoutData: Dispatch<SetStateAction<GraphData>>;
   legendItemHovered: string | undefined;
+  hoveredNodeName: string | undefined;
+  setHoveredNodeName: Dispatch<SetStateAction<string | undefined>>;
+  connectedWithHovered: string[];
   simulation: NetworkSimulation;
   colorScale: ScaleOrdinal<string, string>;
 }
@@ -27,22 +29,23 @@ const Nodes = ({
   layoutData,
   setLayoutData,
   legendItemHovered,
+  hoveredNodeName,
+  setHoveredNodeName,
+  connectedWithHovered,
   simulation,
   colorScale,
 }: NodesProps) => {
-  const { nodes: nodesData, links: linksData } = layoutData;
-  const [hoveredName, setHoveredName] = useState<string | undefined>();
+  const { nodes: nodesData } = layoutData;
   const [nodeElementsData, setNodeElementsData] = useState<NodeElementsData[]>();
-  const connectedWithHovered = connectedWith({ node: hoveredName, linksData })
   useEffect(() => {
     const nodeElementsData = nodesData.map(
       (node) => {
         const { size, name, color } = node;
-        const isHovered = name === hoveredName;
+        const isHovered = name === hoveredNodeName;
         const isConnected = connectedWithHovered.includes(name);
         const legendHovered = legendItemHovered === color;
         const style = nodeStyle({
-          hoveredName: hoveredName || legendItemHovered,
+          hoveredName: hoveredNodeName || legendItemHovered,
           isHovered: isHovered || legendHovered,
           isConnected,
           size,
@@ -52,11 +55,11 @@ const Nodes = ({
       }
     );
     setNodeElementsData(nodeElementsData)
-  }, [layoutData.nodes, hoveredName, legendItemHovered])
+  }, [layoutData.nodes, hoveredNodeName, legendItemHovered])
   return (
     <TransitionGroup component="g">{
       nodeElementsData && nodeElementsData
-        .sort(({ data: { name } }) => name === hoveredName ? 1 : -1)
+        .sort(({ data: { name } }) => name === hoveredNodeName ? 1 : -1)
         .map(({ data, style, ref }) => {
           const { index, x, y, name, path, dependencies, color } = data
           return (
@@ -69,7 +72,7 @@ const Nodes = ({
               <Node
                 ref={ref}
                 setLayoutData={setLayoutData}
-                setHoveredName={setHoveredName}
+                setHoveredName={setHoveredNodeName}
                 simulation={simulation}
                 index={index || 0}
                 x={x || 0}
