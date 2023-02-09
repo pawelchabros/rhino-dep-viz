@@ -34,7 +34,9 @@ const useForceLayout = ({ data, size, ticks = 1e3 }: UseForceLayoutParams): UseF
   useEffect(() => {
     const simulation = forceSimulation(data.nodes)
       .force("link", forceLink(data.links))
-      .force("collide", forceCollide().radius(({ size }: NodeData) => (size / 2) * 1.2))
+      .force("collide", forceCollide().radius(({ size }: Partial<NodeData>) => {
+        return size ? (size / 2) * 1.2 : 1;
+      }))
       .force("charge", forceManyBody().strength(-28e2))
       .force("center", forceCenter(width * 0.55, height * 0.4))
       .force("boundries", forceBoundries(width, height, 0.14))
