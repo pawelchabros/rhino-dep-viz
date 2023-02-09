@@ -2,22 +2,24 @@ import { SimulationNodeDatum, SimulationLinkDatum, Simulation } from "d3-force";
 
 type Id = number;
 
-type Link = SimulationLinkDatum;
+type LinkData = SimulationLinkDatum;
 
-type Node = {
+type NodeData = {
   name: string;
   size: number;
   color: string;
   path: string;
+  size: number;
   dependencies: string[];
+  opacity?: number;
 } & SimulationNodeDatum;
 
-type LinksData = Link[];
-type NodesData = Node[];
+type LinksData = LinkData[];
+type NodesData = NodeData[];
 
 type GraphData = {
-  nodes: Node[];
-  links: Link[];
+  nodes: NodeData[];
+  links: LinkData[];
 };
 
 type NetworkSimulation = Simulation<NodeData, LinkData>;

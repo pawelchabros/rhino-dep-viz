@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, forwardRef, SetStateAction, useEffect } from "react";
 import useDrag from "../hooks/useDrag";
 import { GraphData, NetworkSimulation } from "../types";
 import NodeLabel from "./NodeLabel";
@@ -19,7 +19,7 @@ interface NodeProps {
   r: number;
 }
 
-const Node = ({
+const Node = forwardRef<SVGGElement | null, NodeProps>(({
   x,
   y,
   index,
@@ -32,7 +32,7 @@ const Node = ({
   color,
   opacity,
   r,
-}: NodeProps) => {
+}, ref) => {
   const [draggedPosition, isDragged, dragHandlers] = useDrag({ x, y });
   useEffect(() => {
     setLayoutData((prevLayoutData) => {
@@ -56,6 +56,7 @@ const Node = ({
       onMouseEnter={() => setHoveredName(name)}
       onMouseLeave={() => setHoveredName(undefined)}
       opacity={opacity}
+      ref={ref}
     >
       <circle
         className={styles.node}
@@ -66,6 +67,6 @@ const Node = ({
       <NodeLabel text={path} y={r * 0.8} dependencies={dependencies} />
     </g>
   );
-};
+});
 
 export default Node;
