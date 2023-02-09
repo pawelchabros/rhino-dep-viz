@@ -48,7 +48,7 @@ const Nodes = ({ layoutData, setLayoutData, simulation, colorScale, }: NodesProp
   return (
     <TransitionGroup component="g">{
       nodeElementsData && nodeElementsData
-        .sort(({ data: { name } }) => +(name === hoveredName))
+        .sort(({ data: { name } }) => name === hoveredName ? 1 : -1)
         .map(({ data, style, ref }) => {
           const { index, x, y, name, path, dependencies, color } = data
           return (
